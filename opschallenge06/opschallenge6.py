@@ -19,33 +19,40 @@ def read_key():
     """
     return open("key.key", "rb").read()
 
-def encrypt_file():
-    pass
+def encrypt_file(file_name, key):
+    message = open(file_name, "r").read()
+    return encrypt_message(message, key)
 
-def decrypt_file():
-    pass
 
-def encrypt_message(message):
+def decrypt_file(encrypted_file, key):
+    message = open(file_name, "r").read()
+    return 
+
+def encrypt_message(message, key):
     f = Fernet(key)
     m = message.encode()
     return f.encrypt(m)
-    
-def decrypt_message(encrypted_message, key):
+
+def decrypt_message(encrypted, key):
     f = Fernet(key)
-    return f.decrypt(encrypted_message)
+    return f.decrypt(encrypted)
+
 
 if __name__ == '__main__':
 
+    file = "sample.txt"
     # generate and write a new key
     generate_key()
     key = read_key()
-    mess = "some secret message"
-    # initialize the Fernet class
-    # f = Fernet(key)
-    encrypted = encrypt_message(mess)
+    message = "some secret message"
+    encrypted = encrypt_message(message, key)
     decrypted_encrypted = decrypt_message(encrypted, key)
+    encrypted_file = encrypt_file(file, key)
+
     print(f"""
-        Original Message: {mess}
+        Original Message: {message}
         Encrypted Text: {encrypted}
         Decrypted Text: {decrypted_encrypted}
+        
+        Encrypted File: {encrypted_file}
         """)

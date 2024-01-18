@@ -25,24 +25,27 @@ def encrypt_file():
 def decrypt_file():
     pass
 
-def encrypt_message():
-    pass
+def encrypt_message(message):
+    f = Fernet(key)
+    m = message.encode()
+    return f.encrypt(m)
     
-def decrypt_message():
-    pass
+def decrypt_message(encrypted_message, key):
+    f = Fernet(key)
+    return f.decrypt(encrypted_message)
 
 if __name__ == '__main__':
 
     # generate and write a new key
     generate_key()
     key = read_key()
-    message = "some secret message".encode()
+    mess = "some secret message"
     # initialize the Fernet class
-    f = Fernet(key)
-    encrypted = f.encrypt(message)
-    decrypted_encrypted = f.decrypt(encrypted)
+    # f = Fernet(key)
+    encrypted = encrypt_message(mess)
+    decrypted_encrypted = decrypt_message(encrypted, key)
     print(f"""
-        Original Message: {message}
+        Original Message: {mess}
         Encrypted Text: {encrypted}
         Decrypted Text: {decrypted_encrypted}
         """)

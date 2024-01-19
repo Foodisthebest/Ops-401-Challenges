@@ -126,7 +126,7 @@ if __name__ == "__main__":
     # Read the key from the key file
     key = read_key()
 
-    while (user_input := input(mode)) != "5":
+    while (user_input := input(mode)) != "5"
         print(f"user_input is {user_input} and {type(user_input)}")
         if user_input == "1" or user_input == "2":
             file_path = input("Enter the filepath to the target file: ")

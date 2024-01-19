@@ -107,46 +107,50 @@ def delete_file(file_name):
         print(e)
         return False
 
-
-if __name__ == "__main__":
-    key = "key.key"
-    # prompt the user to select a mode
-    mode = int(
-        input(
-            """Select mode:
+mode = """Select One of the following options:
                      1. Encrypt a file
                      2. Decrypt a file
                      3. Encrypt a message
                      4. Decrypt a message
                      5. Exit
                      > """
-        )
-    )
 
-    if not os.path.exists(key):
-        generate_key()
+if __name__ == "__main__":
+    key = "key.key"
+    # Intro to Walrus operators.
+    # https://towardsdatascience.com/the-walrus-operator-in-python-a315e4f84583
+    # it creates a variable and assigns the return value in one line of code
+    while (user_input := int(input(mode))) != "5":
+    # user_input = int(input(mode))
 
-    key = read_key()
+    # while user_input != "5":
 
-    if mode == 1 or mode == 2:
-        file_path = input("Enter the filepath to the target file: ")
-        if not os.path.exists(file_path):
-            print("File not found.")
+        if not os.path.exists(key):
+            generate_key()
+
+        key = read_key()
+
+        if user_input == 1 or user_input == 2:
+            file_path = input("Enter the filepath to the target file: ")
+            if not os.path.exists(file_path):
+                print("File not found.")
+                exit()
+        elif user_input == 3 or user_input == 4:
+            message = input("Enter the cleartext string: ")
+
+        if user_input == 1:
+            encrypt_file(file_path, key)
+            print(f"{file_path} encrypted successfully.")
+        elif user_input == 2:
+            decrypt_file(file_path, key)
+            print(f"{file_path} decrypted successfully.")
+        elif user_input == 3:
+            print(encrypt_message(message, key))
+        elif user_input == 4:
+            print(decrypt_message(message, key))
+        elif user_input == 5:
             exit()
-    elif mode == 3 or mode == 4:
-        message = input("Enter the cleartext string: ")
+        else:
+            print("That is not an option.")
 
-    if mode == 1:
-        encrypt_file(file_path, key)
-        print(f"{file_path} encrypted successfully.")
-    elif mode == 2:
-        decrypt_file(file_path, key)
-        print(f"{file_path} decrypted successfully.")
-    elif mode == 3:
-        print(encrypt_message(message, key))
-    elif mode == 4:
-        print(decrypt_message(message, key))
-    elif mode == 5:
-        exit()
-    else:
-        print("That is not an option.")
+        # user_input = int(input(mode))

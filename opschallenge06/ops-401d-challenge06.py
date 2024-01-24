@@ -29,9 +29,7 @@ def encrypt_file(file_name, key):
     Delete the existing target file and replace it entirely with the encrypted version.
     """
     message = read_file(file_name)
-    print(f"encrypt message is {message}")
     if delete_file(file_name):
-        print("File exists")
         message = encrypt_message(message, key)
         write_to_file(message, file_name)
         return True
@@ -45,7 +43,6 @@ def decrypt_file(file_name, key):
     Delete the encrypted target file and replace it entirely with the decrypted version.
     """
     message = read_file(file_name)
-    print(f"decrypt message is {message}")
     if delete_file(file_name):
         message = decrypt_message(message, key)
         write_to_file(message, file_name)
@@ -126,8 +123,7 @@ if __name__ == "__main__":
     # Read the key from the key file
     key = read_key()
 
-    while (user_input := input(mode)) != "5"
-        print(f"user_input is {user_input} and {type(user_input)}")
+    while (user_input := input(mode)) != "5":
         if user_input == "1" or user_input == "2":
             file_path = input("Enter the filepath to the target file: ")
             if not os.path.exists(file_path):
@@ -143,8 +139,20 @@ if __name__ == "__main__":
             decrypt_file(file_path, key)
             print(f"{file_path} decrypted successfully.")
         elif user_input == "3":
-            print(encrypt_message(message, key))
+            byte_string = encrypt_message(message, key)
+            output = byte_string.decode('utf-8')
+            print(f"""Encrypted Message:
+                  
+{output}
+
+                  """)
         elif user_input == "4":
-            print(decrypt_message(message, key))
+            byte_string = decrypt_message(message, key)
+            output = byte_string.decode('utf-8')
+            print(f"""Decrypted Message:
+                  
+{output}
+
+                  """)
         else:
             print("That is not an option.")

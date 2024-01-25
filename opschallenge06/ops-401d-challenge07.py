@@ -1,58 +1,30 @@
 #!/usr/bin/env python3
 
-import os 
+# argparse more "robust" because it creates flags and takes input from command line in a way that enforces rules on how input is taken in
+# import argparse
+# import sys
 
-from cryptography.fernet import Fernet
-# https://thepythoncode.com/article/encrypt-decrypt-files-symmetric-python
+# URL: https://docs.python.org/3/library/argparse.html
 
-def generate_key():
-    """
-    Generates a key and save it into a file
-    """
-    key = Fernet.generate_key()
-    with open("key.key", "wb") as key_file:
-        key_file.write(key)
+import argparse
+import pathlib
 
-def read_key():
-    """
-    Loads the key from the current directory named `key.key`
-    """
-    return open("key.key", "rb").read()
-
-def encrypt_file(file_name, key):
-    message = open(file_name, "r").read()
-    return encrypt_message(message, key)
+parser = argparse.ArgumentParser()
+parser.add_argument('-k', type=pathlib.Path, help="Location of key file")
+parser.add_argument('-m', type=str, help="Message")
+parser.add_argument('-f', type=pathlib.Path, help="Location of file to Decrypt/Encrypt")
+parser.add_argument('-e', action='store_true', help="Encrypt")
+parser.add_argument('-d', action='store_true', help="Decrypt")
 
 
-def decrypt_file(encrypted_file, key):
-    message = open(file_name, "r").read()
-    return 
+args = parser.parse_args()
 
-def encrypt_message(message, key):
-    f = Fernet(key)
-    m = message.encode()
-    return f.encrypt(m)
+# Check if both mutually exclusive flags are provided
+if args.m and args.f:
+    parser.error("Options -m and -m cannot be used at the same time.")
 
-def decrypt_message(encrypted, key):
-    f = Fernet(key)
-    return f.decrypt(encrypted)
+if args.e and args.d:
+    parser.error("Options -e and -d cannot be used at the same time.")
 
+print(args)
 
-if __name__ == '__main__':
-
-    file = "sample.txt"
-    # generate and write a new key
-    generate_key()
-    key = read_key()
-    message = "some secret message"
-    encrypted = encrypt_message(message, key)
-    decrypted_encrypted = decrypt_message(encrypted, key)
-    encrypted_file = encrypt_file(file, key)
-
-    print(f"""
-        Original Message: {message}
-        Encrypted Text: {encrypted}
-        Decrypted Text: {decrypted_encrypted}
-        
-        Encrypted File: {encrypted_file}
-        """)

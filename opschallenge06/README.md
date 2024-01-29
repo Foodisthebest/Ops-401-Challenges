@@ -2,99 +2,81 @@
 
 A Python script that encrypts a single file or block of text.
 
-## Example Encrypting A Message
-
 ```bash
-$ ./ops-401d-challenge06.py 
-Select One of the following options:
-                     1. Encrypt a file
-                     2. Decrypt a file
-                     3. Encrypt a message
-                     4. Decrypt a message
-                     5. Exit
-                     > 3
-Enter the cleartext string: Hi Mom
-Encrypted Message:
-                  
-gAAAAABlsIGp6qLI2GIkJQYTQlJcJMd_kur5tRKgYe4ocn3I7_BEEW_tNDuwVTXixSMQtaAfmfl9ShlX9lzUJCfbWok9drP59w==
+$ ./opschallenge7.py --help
+usage: opschallenge7 [-h] (-E | -D) -k KEY [-m [MESSAGE ...] | -f FILE | -F FOLDER]
 
-                  
-Select One of the following options:
-                     1. Encrypt a file
-                     2. Decrypt a file
-                     3. Encrypt a message
-                     4. Decrypt a message
-                     5. Exit
-                     > 4
-Enter the cleartext string: gAAAAABlsIGp6qLI2GIkJQYTQlJcJMd_kur5tRKgYe4ocn3I7_BEEW_tNDuwVTXixSMQtaAfmfl9ShlX9lzUJCfbWok9drP59w==
-Decrypted Message:
-                  
-Hi Mom
+Helpful file encryption tool.
 
-                  
-Select One of the following options:
-                     1. Encrypt a file
-                     2. Decrypt a file
-                     3. Encrypt a message
-                     4. Decrypt a message
-                     5. Exit
-                     > 5
+options:
+  -h, --help            show this help message and exit
+  -E, --ENCRYPT         Encrypt
+  -D, --DECRYPT         Decrypt
+  -k KEY, --key KEY     Location of key file
+  -m [MESSAGE ...], --message [MESSAGE ...]
+                        Message
+  -f FILE, --file FILE  Location of file to Decrypt/Encrypt
+  -F FOLDER, --FOLDER FOLDER
+                        Location of folder to Decrypt/Encrypt
+
+Thanks for using opschallenge7! :)
 ```
 
-## Example Encrypting A File
+## Example Encrypting and Decrypting A Message
 
-Unencrypted `sample.txt`:
+With the -E -m flags we encrypt the message 'Hi Mom'.
+
 ```bash
+$ ./opschallenge7.py -k mykey2.key -E -m Hi Mom
+gAAAAABluDaOqx5V_d7sbxbwx_uOqt0QRPp5IXJfrIO1nD8MbrGQoc4Pj_V08lwbwepPyPmjfsflhPH2MrN6WJH79TqVAeVqIg==
+```
+
+With the -D -m flags we decrypt the encrypted message.
+
+```bash
+$ ./opschallenge7.py -k mykey2.key -D -m gAAAAABluDaOqx5V_d7sbxbwx_uOqt0QRPp5IXJfrIO1nD8MbrGQoc4Pj_V08lwbwepPyPmjfsflhPH2MrN6WJH79TqVAeVqIg==
 Hi Mom
 ```
-Encrypted `sample.txt`:
-```bash
-gAAAAABlsIL5qZL5bl7z7oCl3A9V5ho55GBAaP35PKjYlqhNWk_70PcpNN9Yz_23GxZaKiA2FH2YQAsDkodAHHfwkOcq-wDFrA==
-```
-Example:
-```
-$ ./ops-401d-challenge06.py 
-Select One of the following options:
-                     1. Encrypt a file
-                     2. Decrypt a file
-                     3. Encrypt a message
-                     4. Decrypt a message
-                     5. Exit
-                     > 1
-Enter the filepath to the target file: sample.txt
-sample.txt encrypted successfully.
-Select One of the following options:
-                     1. Encrypt a file
-                     2. Decrypt a file
-                     3. Encrypt a message
-                     4. Decrypt a message
-                     5. Exit
-                     > 2
-Enter the filepath to the target file: sample.txt
-sample.txt decrypted successfully.
-Select One of the following options:
-                     1. Encrypt a file
-                     2. Decrypt a file
-                     3. Encrypt a message
-                     4. Decrypt a message
-                     5. Exit
-                     > 5
-```
 
-## Initial Installation Instructions
+## Example Encrypting and Decrypting a File
+
+With the -E -f flags we encrypt the file.
 
 ```bash
-git clone $repo
-cd $repo
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt 
-chmod +x ./opschallenge6.py 
+
+$ cat mysample.txt 
+Hi this is a file dedicated to loving cake.
+
+$ ./opschallenge7.py -k mykey2.key -E -f mysample.txt 
+File /home/woodstock/Ops-401-Challenges/opschallenge06/mysample.txt encrypted successfully.
+
+$ cat mysample.txt 
+gAAAAABluDfJCdmQz3KsZrmzRFGbLxJh9otjDFjvozDiwTo3xJtFy_SZWAvFVDNh96O5EnsJpygsbqryaFjaInl-BtvFz0niZBqm5cDcVcNMzIFvSBWENGamwyoUlGbgbSMy28Klmtcg
+
 ```
 
-
-## Simple setup
+with the -D -f flags we decrypt the file.
 
 ```bash
-source .venv/bin/activate
+$ ./opschallenge7.py -k mykey2.key -D -f mysample.txt 
+File /home/woodstock/Ops-401-Challenges/opschallenge06/mysample.txt decrypted successfully.
+
+$ cat mysample.txt 
+Hi this is a file dedicated to loving cake.
+```
+
+## Example Encryping and Decrypting a Folder
+
+With the -E -F flags we encrypt a folder.
+
+```bash
+$ ./opschallenge7.py -k mykey2.key -E -F test 
+Folder /home/woodstock/Ops-401-Challenges/opschallenge06/test encrypted successfully.
+```
+
+With the -D -F flags we decrypt the folder contents.
+
+```bash
+$ ./opschallenge7.py -k mykey2.key -D -F test 
+Folder /home/woodstock/Ops-401-Challenges/opschallenge06/test decrypted successfully.
 ```

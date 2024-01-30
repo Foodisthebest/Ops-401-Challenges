@@ -18,19 +18,6 @@ import sys
 
 from scapy.all import *
 
-# Requirements
-
-# In Python, create a TCP Port Range Scanner that tests whether a TCP port is open or closed. The script must:
-
-#     Utilize the scapy library
-#     Define host IP
-#     Define port range or specific set of ports to scan
-#     Test each port in the specified range using a for loop
-#         If flag 0x12 received, send a RST packet to graciously close the open connection. Notify the user the port is open.
-#         If flag 0x14 received, notify user the port is closed.
-#         If no flag is received, notify the user the port is filtered and silently dropped
-
-
 flags = sys.argv
 
 host_ip = flags[1]
@@ -48,7 +35,7 @@ def check_port_open(target_ip, target_port):
 
     # Send the packet and wait for a response
     response_packet = sr1(syn_packet, timeout=1, verbose=0)
-
+    # print(response_packet.show())
     # Check if a response was received (does respond_packet = True ?)
     if response_packet:
         # Check if the response has the SYN-ACK flag set

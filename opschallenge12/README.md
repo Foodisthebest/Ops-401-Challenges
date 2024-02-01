@@ -17,7 +17,7 @@ Add the following features to your Network Security Tool:
 
 ## How to Use:
 
-`$ sudo ./opschallenge12.py -I -C $IPCIDR Block`
+`$ sudo ./opschallenge12.py -I -C $IPCIDR_Block`
 
 Example:
 

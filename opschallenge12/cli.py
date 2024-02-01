@@ -36,8 +36,8 @@ def parse_arguments():
         help="End Port",
     )
     parser.add_argument(
-        "-P",
-        "--ping_range",
+        "-C",
+        "--CIDR",
         type=str,
         required=False,
         help="IP Range Ex: 10.0.0.0/24",

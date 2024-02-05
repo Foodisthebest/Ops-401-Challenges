@@ -1,0 +1,5 @@
+.venv
+rockyou.txt
+rockyou.txt.tar.gz
+*.gz
+*.txt

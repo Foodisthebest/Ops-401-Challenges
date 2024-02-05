@@ -1,4 +1,5 @@
 import argparse
+import pathlib
 
 def parse_arguments():
     parser = argparse.ArgumentParser(
@@ -7,16 +8,29 @@ def parse_arguments():
         epilog="Thanks for using %(prog)s! :)",
     )
     parser.add_argument(
-        "-O", 
+        "-O",
         "--OFFENSIVE",
-        action="store_true", help="Mode 1: Offensive; Dictionary Iterator"
+        action="store_true",
+        required=False,
+        help="Offensive; Dictionary Iterator",
     )
     parser.add_argument(
         "-D",
         "--DEFENSIVE",
-        action="store_true", help="Mode 2: Defensive; Password Recognized"
+        action="store_true",
+        required=False,
+        help="Defensive; Password Recognized",
     )
-
-    
-
+    parser.add_argument(
+        "-F",
+        "--FILE",
+        type=lambda p: pathlib.Path(p).absolute(),
+        required=True,
+        help="Location of word list",
+    )
+    parser.add_argument(
+        "-W", 
+        "--WORD",
+        nargs="*", type=str, help="Message"
+    )
     return parser.parse_args()

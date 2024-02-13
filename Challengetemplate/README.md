@@ -1,4 +1,8 @@
-# Ops Challenge
+# Ops Challenge 
+
+## Setup
+
+cp -r Challengetemplate/ opschallenge17
 
 ## Requirements
 Copy instructions from assignment here

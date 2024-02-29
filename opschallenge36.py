@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Script Name: Signature-based Malware Detection Part 3 of 3                
-# Author: Renona Gay in collaboration with Juan Miguel Cano, Rodolfo Gonzalez, and Kevin Hoang 
+# Author: Renona Gay in collaboration with Andrew Carroll
 # Date of latest revision: 02/28/2024
 # Purpose: Antivirus tool
 # Resource: Andrew Carroll, Kevin Hoang

@@ -42,4 +42,4 @@ print(cookie)
 # - Open it with Firefox
 #
 # Stretch Goal
-# - Give Cookie Monster hands
+# - Give Cookie Monster hands 
